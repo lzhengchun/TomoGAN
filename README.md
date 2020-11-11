@@ -14,9 +14,31 @@ To give it a try:
 
 Train a model with your own dataset
 
-* one of the code-free way is to prepare a h5 file with four datasets as the sample dataset demo-dataset-real.h5. for datasets in the h5 should be named as: _train_ns_ and *train_gt* for training; *test_ns* and *test_gt* for validation, each dataset should have a dimension of (N, H, W) where N is the number of images.
+* one of the code-free way is to prepare a h5 file with four datasets as the sample dataset demo-dataset-real.h5. for datasets in the h5 should be named as: _train_ns_ (noisy input) and *train_gt* (clean, label) for training; *test_ns* (noisy input) and *test_gt* (clean label) for validation, each dataset should have a dimension of (N, H, W) where N is the number of images.
 * Best practice: always good to make sure that there is no outliers (e.g., due to bad pixels in detector) in your data.
-
+```
+h5dump -H demo-dataset-real.h5
+HDF5 "demo-dataset-real.h5" {
+GROUP "/" {
+   DATASET "test_gt" {
+      DATATYPE  H5T_STD_U8LE
+      DATASPACE  SIMPLE { ( 16, 1024, 1024 ) / ( 16, 1024, 1024 ) }
+   }
+   DATASET "test_ns" {
+      DATATYPE  H5T_STD_U8LE
+      DATASPACE  SIMPLE { ( 16, 1024, 1024 ) / ( 16, 1024, 1024 ) }
+   }
+   DATASET "train_gt" {
+      DATATYPE  H5T_STD_U8LE
+      DATASPACE  SIMPLE { ( 128, 1024, 1024 ) / ( 128, 1024, 1024 ) }
+   }
+   DATASET "train_ns" {
+      DATATYPE  H5T_STD_U8LE
+      DATASPACE  SIMPLE { ( 128, 1024, 1024 ) / ( 128, 1024, 1024 ) }
+   }
+}
+}
+```
 __Note__: with the sample dataset (128 images for training) provided here, you may not reproduce our results as it reported in  [arXiv:1910.04081](https://arxiv.org/abs/1910.04081) because we used a much larger dataset that has 2048 images. 
 You may download the X-ray projection from [TomoBank](https://tomobank.readthedocs.io/en/latest/source/data/docs.data.spheres.html) and make a reconstruction using all the projections as ground truth and a subsampled projections (every 32) as (low dose) noisy input. The dataset we provided, both norml dose (all projections) and low-dose (1/32 subsampled), were reconstructed using SIRT algorithms with 100 iterastions. 
 
