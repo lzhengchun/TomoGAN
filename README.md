@@ -8,7 +8,7 @@ I also implemented the generator model based on pure Intel DNNL (MKL-DNN) and NV
 
 To give it a try:
 
-* download sample dataset (dataset/demo-dataset-real.h5) and the ImageNet pretrained vgg model from [Here](https://anl.box.com/s/h6koi0hhwqrj1c9tt82tldzo45tl3x15)
+* download sample dataset (only need to download _dataset/demo-dataset-real.h5_) and the ImageNet pretrained vgg model from [Here](https://anl.box.com/s/h6koi0hhwqrj1c9tt82tldzo45tl3x15)
 * install dependencies, Tensorflow(preferably 1.13 for TF1 version, 2.2 for TF2 version)
 * run with python ./main-gan.py -gpu=0 -expName=test -dsfn=dataset/demo-dataset-real.h5
 
