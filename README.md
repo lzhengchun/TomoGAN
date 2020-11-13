@@ -1,8 +1,6 @@
-![version](https://img.shields.io/badge/version-v2.0.0-blue.svg?style=plastic)
-
-Tested on ![tensorflow](https://img.shields.io/badge/TensorFlow-v2.2.0-green.svg?style=plastic)
+![version](https://img.shields.io/badge/Version-v2.0.0-blue.svg?style=plastic)
+![tensorflow](https://img.shields.io/badge/TensorFlow-v2.2.0-green.svg?style=plastic)
 ![tensorflow](https://img.shields.io/badge/TensorFlow-v1.13.0-green.svg?style=plastic)
-
 ![license](https://img.shields.io/badge/license-CC_BY--NC-red.svg?style=plastic)
 
 # TomoGAN
