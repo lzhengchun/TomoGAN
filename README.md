@@ -15,7 +15,7 @@ To give it a try:
 
 * download sample dataset (only need to download _dataset/demo-dataset-real.h5_) and the ImageNet pretrained vgg model from [Here](https://anl.box.com/s/h6koi0hhwqrj1c9tt82tldzo45tl3x15)
 * install dependencies, Tensorflow(preferably 1.13 for TF1 version, 2.2 for TF2 version)
-* run with python ./main-gan.py -gpu=0 -expName=test -dsfn=dataset/demo-dataset-real.h5
+* run with ```python ./main-gan.py -gpu=0 -expName=test -dsfn=dataset/demo-dataset-real.h5```
 
 Train a model with your own dataset
 
@@ -55,7 +55,9 @@ If you use this code for your research, please cite our paper(s):
     title={Deep Learning Accelerated Light Source Experiments},
     author={Zhengchun Liu and Tekin Bicer and Rajkumar Kettimuthu and Ian Foster},
     year={2019},
-    booktitle={2019 IEEE/ACM Third Workshop on Deep Learning on Supercomputers (DLS)}
+    booktitle={2019 IEEE/ACM Third Workshop on Deep Learning on Supercomputers (DLS)},
+    pages={20-28},
+    doi={10.1109/DLS49591.2019.00008}
 }
 
 @article{liu2020tomogan,
