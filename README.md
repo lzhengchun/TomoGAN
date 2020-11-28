@@ -63,7 +63,7 @@ If you use this code for your research, please cite our paper(s):
 @article{liu2020tomogan,
   title={TomoGAN: low-dose synchrotron x-ray tomography with generative adversarial networks: discussion},
   author={Liu, Zhengchun and Bicer, Tekin and Kettimuthu, Rajkumar and Gursoy, Doga and De Carlo, Francesco and Foster, Ian},
-  journal={JOSA A},
+  journal={Journal of the Optical Society of America A},
   volume={37},
   number={3},
   pages={422--434},
