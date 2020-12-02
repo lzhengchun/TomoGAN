@@ -68,7 +68,7 @@ def adversarial_loss(fake_output):
 gen_optimizer  = tf.keras.optimizers.Adam(1e-4)
 disc_optimizer = tf.keras.optimizers.Adam(1e-4)
 
-for epoch in range(args.maxiter):
+for epoch in range(args.maxiter+1):
     time_git_st = time.time()
     for _ge in range(args.itg):
         X_mb, y_mb = mb_data_iter.next() # with prefetch
