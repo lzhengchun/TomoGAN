@@ -78,7 +78,7 @@ ckpt = tf.train.Checkpoint(generator_optimizer=gen_optimizer,
                             generator=generator,
                             discriminator=discriminator)
 
-for epoch in range(args.maxiter):
+for epoch in range(args.maxiter+1):
     time_git_st = time.time()
     for _ge in range(gene_iters):
         X_mb, y_mb = mb_data_iter.next() # with prefetch
