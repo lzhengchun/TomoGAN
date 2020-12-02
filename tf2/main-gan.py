@@ -51,7 +51,7 @@ generator = make_generator_model(input_shape=(None, None, args.depth), nlayers=a
 discriminator = make_discriminator_model(input_shape=(args.psz, args.psz, 1))
 
 feature_extractor_vgg = tf.keras.applications.VGG19(\
-                        weights='vgg19_weights_notop.h5', \
+                        weights='../vgg19_weights_notop.h5', \
                         include_top=False)
 
 # This method returns a helper function to compute cross entropy loss
