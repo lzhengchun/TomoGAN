@@ -3,7 +3,7 @@
 ![tensorflow](https://img.shields.io/badge/TensorFlow-v1.13.0-green.svg?style=plastic)
 ![license](https://img.shields.io/badge/license-CC_BY--NC-red.svg?style=plastic)
 
-If you are new to convolution neural network, we have some tutorial Jupyter [notebooks](https://github.com/lzhengchun/dn-tutorial). 
+If you are new to using convolution neural network for image restoration, we have some tutorial Jupyter [notebooks](https://github.com/lzhengchun/dn-tutorial). 
 
 # TomoGAN
 
