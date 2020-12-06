@@ -25,7 +25,12 @@ with h5py.File(args.dsfn, 'r') as h5fd:
     ns_img_test = h5fd['test_ns'][:]
     gt_img_test = h5fd['test_gt'][:]
 
-dn_img = mdl.predict(ns_img_test * 255).squeeze()
+if len(ns_img_test.shape) == 3:
+    dn_img = mdl.predict(ns_img_test[:,:,:,np.newaxis]).squeeze()
+elif len(ns_img_test.shape) == 4:
+    dn_img = mdl.predict(ns_img_test).squeeze()
+else:
+    print("Model input must have N, H, W, C four dimension")
 
 with h5py.File('dn.h5', 'w') as h5fd:
     h5fd.create_dataset("ns", data=ns_img_test, dtype=np.float32)
