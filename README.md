@@ -61,7 +61,7 @@ If you use this code for your research, please cite our paper(s):
     author={Zhengchun Liu and Tekin Bicer and Rajkumar Kettimuthu and Ian Foster},
     year={2019},
     booktitle={2019 IEEE/ACM Third Workshop on Deep Learning on Supercomputers (DLS)},
-    pages={20-28},
+    pages={20--28},
     doi={10.1109/DLS49591.2019.00008}
 }
 
@@ -73,6 +73,7 @@ If you use this code for your research, please cite our paper(s):
   number={3},
   pages={422--434},
   year={2020},
+  doi={10.1364/JOSAA.375595},
   publisher={Optical Society of America}
 }
 
