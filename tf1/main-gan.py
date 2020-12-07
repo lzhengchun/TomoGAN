@@ -34,10 +34,6 @@ if len(args.gpus) > 0:
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpus
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # disable printing INFO, WARNING, and ERROR
 
-in_depth = args.depth
-disc_iters, gene_iters = args.itd, args.itg
-lambda_mse, lambda_adv, lambda_perc = args.lmse, args.ladv, args.lperc
-
 itr_out_dir = args.expName + '-itrOut'
 if os.path.isdir(itr_out_dir): 
     shutil.rmtree(itr_out_dir)
@@ -49,10 +45,10 @@ if args.print == 0:
 # build minibatch data generator with prefetch
 mb_data_iter = bkgdGen(data_generator=gen_train_batch_bg(
                                       dsfn=args.dsfn, mb_size=args.mbsz, \
-                                      in_depth=in_depth, img_size=args.psz), \
+                                      in_depth=args.depth, img_size=args.psz), \
                        max_prefetch=args.mbsz*4)
 
-generator = make_generator_model(input_shape=(None, None, in_depth), nlayers=args.lunet ) 
+generator = make_generator_model(input_shape=(None, None, args.depth), nlayers=args.lunet ) 
 discriminator = make_discriminator_model(input_shape=(args.psz, args.psz, 1))
 
 feature_extractor_vgg = tf.keras.applications.VGG19(\
@@ -80,7 +76,7 @@ ckpt = tf.train.Checkpoint(generator_optimizer=gen_optimizer,
 
 for epoch in range(args.maxiter+1):
     time_git_st = time.time()
-    for _ge in range(gene_iters):
+    for _ge in range(args.itg):
         X_mb, y_mb = mb_data_iter.next() # with prefetch
         with tf.GradientTape() as gen_tape:
             gen_tape.watch(generator.trainable_variables)
@@ -99,18 +95,18 @@ for epoch in range(args.maxiter+1):
 
             perc_loss= tf.losses.mean_squared_error(vggf_gt.reshape(-1), vggf_gen.reshape(-1))
 
-            gen_loss = lambda_adv * loss_adv + lambda_mse * loss_mse + lambda_perc * perc_loss
+            gen_loss = args.ladv * loss_adv + args.lmse * loss_mse + args.lperc * perc_loss
 
             gen_gradients = gen_tape.gradient(gen_loss, generator.trainable_variables)
             gen_optimizer.apply_gradients(zip(gen_gradients, generator.trainable_variables))
 
     itr_prints_gen = '[Info] Epoch: %05d, gloss: %.2f (mse%.3f, adv%.3f, perc:%.3f), gen_elapse: %.2fs/itr' % (\
-                     epoch, gen_loss, loss_mse*lambda_mse, loss_adv*lambda_adv, perc_loss*lambda_perc, \
-                     (time.time() - time_git_st)/gene_iters, )
+                     epoch, gen_loss, loss_mse*args.lmse, loss_adv*args.ladv, perc_loss*args.lperc, \
+                     (time.time() - time_git_st)/args.itg, )
     time_dit_st = time.time()
 
-    for _de in range(disc_iters):
-        X_mb, y_mb = mb_data_iter.next() # with prefetch        
+    for _de in range(args.itd):
+        X_mb, y_mb = mb_data_iter.next() # with prefetch 
         with tf.GradientTape() as disc_tape:
             disc_tape.watch(discriminator.trainable_variables)
 
@@ -126,16 +122,16 @@ for epoch in range(args.maxiter+1):
 
     print('%s; dloss: %.2f (r%.3f, f%.3f), disc_elapse: %.2fs/itr, gan_elapse: %.2fs/itr' % (itr_prints_gen,\
           disc_loss, disc_real_o.numpy().mean(), disc_fake_o.numpy().mean(), \
-          (time.time() - time_dit_st)/disc_iters, time.time()-time_git_st))
+          (time.time() - time_dit_st)/args.itd, time.time()-time_git_st))
 
-    if epoch % (500//gene_iters) == 0:
-        X222, y222 = get1batch4test(dsfn=args.dsfn, in_depth=in_depth)
+    if epoch % (500//args.itg) == 0:
+        X222, y222 = get1batch4test(dsfn=args.dsfn, in_depth=args.depth)
         pred_img = generator.predict(X222[:1])
 
         save2img(pred_img[0,:,:,0], '%s/it%05d.png' % (itr_out_dir, epoch))
         if epoch == 0: 
             save2img(y222[0,:,:,0], '%s/gt.png' % (itr_out_dir))
-            save2img(X222[0,:,:,in_depth//2], '%s/ns.png' % (itr_out_dir))
+            save2img(X222[0,:,:,args.depth//2], '%s/ns.png' % (itr_out_dir))
 
         generator.save("%s/%s-it%05d.h5" % (itr_out_dir, args.expName, epoch), \
                        include_optimizer=False)
