@@ -55,13 +55,10 @@ def gen_train_batch_bg(dsfn, mb_size, in_depth, img_size):
 
 def get1batch4test(dsfn, in_depth):
     with h5py.File(dsfn, 'r') as h5fd:
-        ns_imgs = h5fd['test_ns'][:].astype(np.float32)
-        gt_imgs = h5fd['test_gt'][:].astype(np.float32)
+        X = h5fd['test_ns'][:].astype(np.float32)
+        Y = h5fd['test_gt'][:].astype(np.float32)
 
-    X = ns_imgs[:1]
-    Y = gt_imgs[:1]
-
-    idx = (X.shape[0]-in_depth, )
+    idx = (X.shape[0]-in_depth, ) # always use slice in_depth//2 for validation
     batch_X = np.array([np.transpose(X[s_idx : (s_idx+in_depth)], (1, 2, 0)) for s_idx in idx])
     batch_Y = np.expand_dims([Y[s_idx+in_depth//2] for s_idx in idx], 3) 
 
