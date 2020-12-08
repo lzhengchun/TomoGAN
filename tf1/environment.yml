@@ -1,0 +1,6 @@
+name: tf1forTomoGAN
+dependencies:
+  - python=3.6 
+  - tensorflow-gpu=1.13
+  - h5py
+  - imageio
