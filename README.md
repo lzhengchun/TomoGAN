@@ -1,6 +1,6 @@
 ![version](https://img.shields.io/badge/Version-v2.0.0-blue.svg?style=plastic)
 ![tensorflow](https://img.shields.io/badge/TensorFlow-v2.2.0-green.svg?style=plastic)
-![tensorflow](https://img.shields.io/badge/TensorFlow-v1.15.0-green.svg?style=plastic)
+![tensorflow](https://img.shields.io/badge/TensorFlow-v1.13.0-green.svg?style=plastic)
 ![license](https://img.shields.io/badge/license-CC_BY--NC-red.svg?style=plastic)
 
 If you are new to using convolution neural network for image restoration, we have some tutorial Jupyter [notebooks](https://github.com/lzhengchun/dn-tutorial). 
@@ -19,7 +19,7 @@ I also implemented the generator model based on pure Intel DNNL (MKL-DNN) and NV
 To give it a try:
 
 * download sample dataset (only need to download _dataset/demo-dataset-real.h5_) from [Here](https://anl.box.com/s/h6koi0hhwqrj1c9tt82tldzo45tl3x15)
-* install dependencies, Tensorflow(preferably 1.15 for TF1 version, 2.2 for TF2 version)
+* install dependencies, Tensorflow(preferably 1.13 for TF1 version, 2.2 for TF2 version)
 * run with ```python ./main-gan.py -gpu=0 -expName=test -dsfn=dataset/demo-dataset-real.h5```
 
 Train a model with your own dataset
