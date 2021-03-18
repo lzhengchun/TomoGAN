@@ -55,6 +55,12 @@ You may download the X-ray projection from [TomoBank](https://tomobank.readthedo
 ## Citation
 If you use this code for your research, please cite our paper(s):
 
+- Zhengchun Liu, Tekin Bicer, Rajkumar Kettimuthu and Ian Foster, "Deep Learning Accelerated Light Source Experiments," 2019 IEEE/ACM Third Workshop on Deep Learning on Supercomputers (DLS), Denver, CO, USA, 2019, pp. 20-28, doi: 10.1109/DLS49591.2019.00008.
+
+- Zhengchun Liu, Tekin Bicer, Rajkumar Kettimuthu, Doga Gursoy, Francesco De Carlo, and Ian Foster, "TomoGAN: low-dose synchrotron x-ray tomography with generative adversarial networks: discussion," J. Opt. Soc. Am. A 37, 422-434 (2020)
+
+Or via bibtex
+
 ```
 @inproceedings{liu2019deep,
     title={Deep Learning Accelerated Light Source Experiments},
